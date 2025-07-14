@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Blog preview card</title>
+
+  <style> 
+
+  body {
+    background-color: rgb(252, 219, 88); 
+    font-family: Arial, Helvetica, sans-serif;
+  } 
+
+  .form { 
+    margin-left: 10px; 
+    margin-top: 20px; 
+  } 
+
+  .image-texte {  
+    display: flex; 
+    gap: 10px; 
+   } 
+
+  .texte {
+  flex: 1;
+  font-size: 16px; 
+  } 
+
+  #container { 
+    width: 350px; 
+    height: 490px; 
+    background-color: white; 
+    margin: 30px auto; 
+    box-shadow: 10px 10px rgb(0, 0, 0);  
+    border-radius: 20px; 
+    border: 1.5px solid black;  
+    font-weight: bold; 
+    padding: 10px;  
+  } 
+
+  .image { 
+    margin: 10px auto; 
+    display: block; 
+    border-radius: 20px; 
+  } 
+
+   .p {
+    color: rgb(87, 87, 87);
+   }
+
+
+  button {
+    background-color: rgb(252, 219, 88); 
+    border: 1px solid rgb(252, 219, 88); 
+    height: 30px;      
+    border-radius: 5px; 
+    font-weight: 800;
+  }
+
+  </style> 
+
+</head>
+<body> 
+
+  <main id="container"> 
+   
+    <img src="./assets/images/illustration-article.svg" alt="" class="image">
+  
+
+   <div class="form">
+  <button>Learning</button> 
+
+  <P>Published 21 Dec 2023</P> 
+
+  <h2>HTML & CSS foundations</h2> 
+
+  <p class="p">These languages are the backbone of every website, defining structure, content, and presentation.</p>
+
+
+  <div class="image-texte">
+  <img src="assets/images/avatar.png" alt=" Greg Hooper" style="width: 40px; height: 40px; ">
+  <div class="texte">
+  <p>Greg Hooper </p>
+  </div>
+ </div>
+  </div> 
+  </main> 
+
+</body>
+</html>
