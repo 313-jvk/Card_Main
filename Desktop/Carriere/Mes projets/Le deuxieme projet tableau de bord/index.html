@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord de Données</title> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Mon Tableau de Bord Interactif</h1>
+    </header>
+
+    <main class="dashboard-container"> 
+
+        <section class="dashboard-filters">
+    <h2>Filtres</h2>
+    <div class="filter-group">
+        <label for="month-select">Mois :</label>
+        <select id="month-select">
+            <option value="all">Tous les mois</option>
+            <option value="Jan">Janvier</option>
+            <option value="Fév">Février</option>
+            <option value="Mar">Mars</option>
+            <option value="Avr">Avril</option>
+            <option value="Mai">Mai</option>
+            <option value="Juin">Juin</option>
+        </select>
+    </div>
+</section>
+
+<section class="chart-section">
+    <h2>Ventes Mensuelles par Catégorie</h2>
+    <div class="chart-container">
+        <canvas id="salesByCategoryChart"></canvas>
+    </div>
+</section>
+
+<section class="chart-section">
+    <h2>Unités Vendues par Mois</h2>
+    <div class="chart-container">
+        <canvas id="unitsByMonthChart"></canvas>
+    </div>
+</section>
+
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Tableau de Bord. Tous droits réservés.</p>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html> 
