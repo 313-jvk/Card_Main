@@ -3,56 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau de Bord de Données</title> 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
-    <link rel="stylesheet" href="css/style.css">
+    <title>Tableau de Bord - Visualisation de Données</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
 </head>
 <body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1 class="dashboard-title">
+                    <span class="title-icon">📊</span>
+                    Tableau de Bord Analytics
+                </h1>
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <span class="stat-value" id="totalRevenue">€0</span>
+                        <span class="stat-label">Chiffre d'Affaires</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="totalOrders">0</span>
+                        <span class="stat-label">Commandes</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="avgOrderValue">€0</span>
+                        <span class="stat-label">Panier Moyen</span>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-    <header>
-        <h1>Mon Tableau de Bord Interactif</h1>
-    </header>
+        <!-- Filters Section -->
+        <section class="filters-section">
+            <div class="filters-container">
+                <div class="filter-group">
+                    <label for="periodFilter">Période :</label>
+                    <select id="periodFilter" class="filter-select">
+                        <option value="all">Toute la période</option>
+                        <option value="last6months">6 derniers mois</option>
+                        <option value="last3months">3 derniers mois</option>
+                        <option value="lastmonth">Dernier mois</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="categoryFilter">Catégorie :</label>
+                    <select id="categoryFilter" class="filter-select">
+                        <option value="all">Toutes les catégories</option>
+                        <option value="electronics">Électronique</option>
+                        <option value="clothing">Vêtements</option>
+                        <option value="books">Livres</option>
+                        <option value="home">Maison & Jardin</option>
+                        <option value="sports">Sports</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="regionFilter">Région :</label>
+                    <select id="regionFilter" class="filter-select">
+                        <option value="all">Toutes les régions</option>
+                        <option value="paris">Île-de-France</option>
+                        <option value="lyon">Auvergne-Rhône-Alpes</option>
+                        <option value="marseille">Provence-Alpes-Côte d'Azur</option>
+                        <option value="toulouse">Occitanie</option>
+                        <option value="lille">Hauts-de-France</option>
+                    </select>
+                </div>
+                <button id="resetFilters" class="reset-btn">Réinitialiser</button>
+            </div>
+        </section>
 
-    <main class="dashboard-container"> 
+        <!-- Charts Grid -->
+        <main class="charts-grid">
+            <!-- Revenue Chart -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 class="chart-title">Évolution du Chiffre d'Affaires</h3>
+                    <div class="chart-controls">
+                        <button class="chart-type-btn active" data-chart="revenue" data-type="line">Courbe</button>
+                        <button class="chart-type-btn" data-chart="revenue" data-type="bar">Barres</button>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
 
-        <section class="dashboard-filters">
-    <h2>Filtres</h2>
-    <div class="filter-group">
-        <label for="month-select">Mois :</label>
-        <select id="month-select">
-            <option value="all">Tous les mois</option>
-            <option value="Jan">Janvier</option>
-            <option value="Fév">Février</option>
-            <option value="Mar">Mars</option>
-            <option value="Avr">Avril</option>
-            <option value="Mai">Mai</option>
-            <option value="Juin">Juin</option>
-        </select>
+            <!-- Category Distribution -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 class="chart-title">Répartition par Catégorie</h3>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Regional Performance -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 class="chart-title">Performance par Région</h3>
+                    <div class="chart-controls">
+                        <button class="chart-type-btn active" data-chart="region" data-type="bar">Barres</button>
+                        <button class="chart-type-btn" data-chart="region" data-type="horizontalBar">Horizontales</button>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="regionChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Orders Trend -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 class="chart-title">Tendance des Commandes</h3>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="ordersChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Top Products -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 class="chart-title">Top 10 Produits</h3>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="productsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Customer Segments -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 class="chart-title">Segments Clients</h3>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="segmentsChart"></canvas>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <p>&copy; 2025 Dashboard Analytics - Données mises à jour en temps réel</p>
+        </footer>
     </div>
-</section>
-
-<section class="chart-section">
-    <h2>Ventes Mensuelles par Catégorie</h2>
-    <div class="chart-container">
-        <canvas id="salesByCategoryChart"></canvas>
-    </div>
-</section>
-
-<section class="chart-section">
-    <h2>Unités Vendues par Mois</h2>
-    <div class="chart-container">
-        <canvas id="unitsByMonthChart"></canvas>
-    </div>
-</section>
-
-
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Tableau de Bord. Tous droits réservés.</p>
-    </footer>
 
     <script src="js/data.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/app.js"></script>
 </body>
-</html> 
+</html>
